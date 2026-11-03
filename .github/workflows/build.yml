@@ -1,0 +1,38 @@
+name: Build SALOMOH
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -B build -G Xcode -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build AU + VST3
+        run: cmake --build build --config Release --target SALOMOH_AU SALOMOH_VST3 -- -quiet
+
+      - name: Validate AU (auval, the test Logic runs)
+        run: |
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R "build/SALOMOH_artefacts/Release/AU/SALOMOH.component" ~/Library/Audio/Plug-Ins/Components/
+          killall -9 AudioComponentRegistrar || true
+          sleep 3
+          auval -v aumu Slmh Ifmy
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp -R "build/SALOMOH_artefacts/Release/AU/SALOMOH.component" dist/
+          cp -R "build/SALOMOH_artefacts/Release/VST3/SALOMOH.vst3" dist/
+          cp INSTALL.txt dist/
+          cd dist && zip -qry ../SALOMOH-mac.zip .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SALOMOH-mac
+          path: SALOMOH-mac.zip

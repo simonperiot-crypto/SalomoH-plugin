@@ -1,0 +1,15 @@
+SALOMOH — Installation dans Logic Pro
+=====================================
+
+1. Ouvre le Finder, puis menu Aller > Aller au dossier...
+   et colle :  ~/Library/Audio/Plug-Ins/Components/
+2. Glisse SALOMOH.component dans ce dossier.
+3. Ouvre le Terminal et colle cette ligne (débloque le plugin non signé) :
+
+   xattr -cr ~/Library/Audio/Plug-Ins/Components/SALOMOH.component
+
+4. Ouvre Logic Pro. Nouvelle piste "Instrument logiciel"
+   > Instrument > AU Instruments > IFMY > SALOMOH
+
+Si SALOMOH n'apparaît pas : Logic Pro > Réglages > Gestionnaire de plug-ins,
+cherche SALOMOH et clique "Réinitialiser et réanalyser la sélection".
