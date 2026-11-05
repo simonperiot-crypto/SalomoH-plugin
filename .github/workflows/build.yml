@@ -2,6 +2,9 @@ name: Build SALOMOH
 
 on:
   push:
+    paths-ignore:
+      - "vox/**"
+      - ".github/workflows/build-vox.yml"
   workflow_dispatch:
 
 jobs:

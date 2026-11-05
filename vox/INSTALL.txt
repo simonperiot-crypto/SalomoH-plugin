@@ -1,0 +1,18 @@
+IFMY VOX — Installation dans Logic Pro
+======================================
+
+1. Ouvre le Finder, puis menu Aller > Aller au dossier...
+   et colle :  ~/Library/Audio/Plug-Ins/Components/
+2. Glisse "IFMY VOX.component" dans ce dossier.
+3. Ouvre le Terminal et colle cette ligne (débloque le plugin non signé) :
+
+   xattr -cr ~/Library/Audio/Plug-Ins/Components/"IFMY VOX.component"
+
+4. Ouvre Logic Pro. Sur ta piste audio voix, clique sur un slot d'insert
+   > Audio Units > IFMY > IFMY VOX
+
+Si IFMY VOX n'apparaît pas : Logic Pro > Réglages > Gestionnaire de plug-ins,
+cherche IFMY VOX et clique "Réinitialiser et réanalyser la sélection".
+
+Astuce enregistrement : en prise de voix, mets la piste en "Low Latency Mode"
+(icône horloge dans la barre de contrôle de Logic) pour chanter sans retard.
